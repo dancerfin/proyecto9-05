@@ -14,17 +14,7 @@ import statistics
 
 class HybridDDoSDetector:
     def __init__(self):
-        """
-        Modelo híbrido mejorado que combina Random Forest y SVM para detección de DDoS.
-        
-        Mejoras implementadas:
-        - Balanceo de clases con class_weight
-        - Normalización de características
-        - Umbrales adaptativos
-        - Sistema de votación temporal
-        - Votación ponderada mejorada
-        - Mecanismo de fallback robusto
-        """
+
         self.rf_model = None
         self.svm_model = None
         self.scaler = None
@@ -153,13 +143,7 @@ class HybridDDoSDetector:
                 print(f"Umbral dinámico actualizado: {self.dynamic_threshold:.2f}")
     
     def hybrid_predict(self, features):
-        """
-        Predicción híbrida mejorada que combina ambos modelos con:
-        - Normalización de características
-        - Umbrales dinámicos
-        - Votación ponderada
-        - Mecanismo de fallback
-        """
+
         try:
             # Convertir a array numpy y normalizar
             features = np.array(features).reshape(1, -1).astype(float)
@@ -218,7 +202,7 @@ class HybridDDoSDetector:
     def _improved_decision_engine(self, rf_class, rf_conf, rf_attack, 
                                 svm_class, svm_conf, svm_attack, combined_prob):
         """
-        Motor de decisión mejorado:
+        Motor de decisión:
         1. Si ambos modelos están muy seguros y coinciden -> usa ese resultado
         2. Si un modelo está mucho más seguro que el otro -> usa ese
         3. Si ambos están inseguros -> prioriza RF pero con umbral bajo
